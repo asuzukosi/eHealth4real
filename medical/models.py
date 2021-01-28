@@ -22,8 +22,8 @@ class Disease(models.Model):
         return self.name
 
     def num_patients(self):
-        p = Patient.objects.all()
-        pd = Patient.objects.filter(diseases=self)
+        p = Patient.objects.filter(registered=True)
+        pd = Patient.objects.filter(registered=True).filter(diseases=self)
 
         return [len(pd), len(p)-len(pd)]  # Returns number of positive and number of negative patients of that disease
 

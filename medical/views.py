@@ -79,6 +79,10 @@ def patient_register(request):
                 messages.error(request, error)
             return render(request, 'register_patient.html', context)
 
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "username already exists and is not available")
+            return render(request, 'register_patient.html', context)
+
         u = User(username=username, password=password, first_name=firstname, last_name=lastname, email=email)
         u.set_password(password)
         g = Group.objects.get(name='Patient')
@@ -187,9 +191,54 @@ def add_patient_details(request):
 @medics_only
 def records(request):
     patients = Patient.objects.all()
+    diseases = Disease.objects.all()
+
+    disease = request.GET.get("disease", "all")
+    gender = request.GET.get("gender", "all")
+    age = request.GET.get("age", "all")
+    registered = request.GET.get("registered", "all")
+
+    if disease != "all":
+        d = Disease.objects.get(name=disease)
+        patients = filter(lambda x: x.diseases == d, patients)
+
+    if gender != "all":
+        patients = filter(lambda x: x.gender == gender, patients)
+
+    if age != "all":
+        if age == "0-17":
+            patients = filter(lambda x: x.age >= 0, patients)
+            patients = filter(lambda x: x.age <= 17, patients)
+
+        elif age == "18-35":
+            patients = filter(lambda x: x.age >= 18, patients)
+            patients = filter(lambda x: x.age <= 35, patients)
+
+        elif age == "36-60":
+            patients = filter(lambda x: x.age >= 36, patients)
+            patients = filter(lambda x: x.age <= 60, patients)
+
+        else:
+            patients = filter(lambda x: x.age >= 61, patients)
+
+    if registered != "all":
+        if registered == "true":
+            patients = filter(lambda x: x.registered, patients)
+
+        else:
+            patients = filter(lambda x: not x.registered, patients)
+
+    patients_list = []
+    for patient in patients:
+        patients_list.append(patient)
+
     context = {
-        "patients": patients
+        "patients": patients_list,
+        "diseases": diseases,
     }
+
+    if len(patients_list) == 0:
+        context["empty"] = True
     return render(request, 'records.html', context)
 
 
