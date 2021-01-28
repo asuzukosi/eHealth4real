@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="margin-left:10%; width:80%;">
+    {% for message in messages%}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+                <div class="alert alert-danger login-error" role="alert">
+                {{message}}
+                </div>
+                {% else %}
+                <div class="alert alert-success" role="alert">
+                {{message}}
+                </div>
+                {% endif %}
+    {% endfor %}
+</div>
+
+
+  <h2 style="margin-left:3%;">
+    eHealth4real Data
+  </h2>
+
+  <div class="row" style="margin-left: 5%; color: white;">
+
+      <div class="card text-white bg-primary mb-3" style="max-width: 18rem; margin-left: 5%;">
+      <div class="card-header">Patients</div>
+      <div class="card-body">
+      <h5 class="card-title">Number of patients: {{no_patients}}</h5>
+      <h6 class="card-text">This shows the number of register patients on eHealth4real who have entered their medical data on the platform.</h6>
+      </div>
+      </div>
+
+
+
+      <div class="card text-white bg-success mb-3" style="max-width: 18rem; margin-left: 5%;">
+      <div class="card-header">Medical Practitioners</div>
+      <div class="card-body">
+      <h5 class="card-title">Number of medical practitioners : {{no_medics}}</h5>
+      <h6 class="card-text">This shows the number of registered medical practitioners on the eHealth4real platform who hav access to patient data</h6>
+      </div>
+      </div>
+
+
+      <div class="card text-white bg-danger mb-3" style="max-width: 18rem; margin-left: 5%;">
+      <div class="card-header">Diseases/ Conditions</div>
+      <div class="card-body">
+      <h5 class="card-title">Number of medical diseases/conditions : {{no_diseases}}</h5>
+      <h6 class="card-text">This shows the number of registered medical diseases/ conditions on eHealth4real</h6>
+      </div>
+      </div>
+  </div>
+
+  <h2 style="margin-left:3%;">
+    Charts of registered Diseases
+  </h2>
+  <div class="row" style="margin-left: 3%">
+     {% for disease in diseases %}
+    {% include 'chart.html' with disease=disease %}
+    {% endfor %}
+  </div>
+
+{% endblock content %}

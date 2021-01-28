@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="fdb-block py-0">
+      {% load static %}
+      <div class="container py-5 my-5" style="background-image: url({% static 'imgs/shapes/4.svg' %});">
+        <div class=" row justify-content-end">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5 text-left">
+            <div class="fdb-box">
+              <div class="row">
+                <div class="col">
+                  <h1>Log In</h1>
+                  <p class="lead">Sign-in to access data analytics and also analyze and input medical data</p>
+                </div>
+              </div>
+              <form method="post">
+                  {% csrf_token %}
+              <div class="row">
+                <div class="col mt-4">
+                  <input type="text" class="form-control" placeholder="Username" name="username" required>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="password" class="form-control" placeholder="Password" name="password" required>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <button class="btn btn-secondary" type="submit">Submit</button>
+                </div>
+              </div>
+                  <p>
+                      don't have an account? <a href="{% url 'Register' %}">sign up now</a>
+                  </p>
+            </form>
+
+                {% for message in messages%}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+                <div class="alert alert-danger login-error" role="alert">
+                {{message}}
+                </div>
+                {% else %}
+                <div class="alert alert-success" role="alert">
+                {{message}}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock content %}

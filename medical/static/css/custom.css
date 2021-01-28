@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.login-error{
+    margin-top: 10px;
+}
+
+.auth{
+ text-align : left;
+}
+
+.chart{
+    height: 400px;
+    width: 400px;
+    margin: 10px;
+}
+
+.title-text{
+    font-family: 'Fredoka One', cursive;
+}
+
+.title-text a:hover{
+    text-decoration: none;
+}

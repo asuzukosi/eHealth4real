@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}eHealth4real{% endblock title%}</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+      {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/froala_blocks.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <style>
+      .fdb-block {
+        border-bottom: 1px solid var(--light);
+      }
+    </style>
+  </head>
+  <body>
+  <style>
+  #navigator {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  #navigator .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 720px) {
+    #navigator {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  #navigator a {
+    font-size: 14px;
+  }
+
+  #navigator+section {
+    padding: 250px 0;
+  }
+
+</style>
+      <header class="bg-dark">
+      <div class="container">
+        <nav class="navbar navbar-expand-md no-gutters">
+          <div class="col-2 text-left title-text">
+            <a href="{% url 'Home'%}">
+              <h4>eHealth4real</h4>
+            </a>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav12" aria-controls="navbarNav12" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-center col-md-8" id="navbarNav12">
+            <ul class="navbar-nav justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'Records'%}">Records</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'Add Patient Details' %}">Input Data</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.linkedin.com/in/kosisochukwu-asuzu-793494190/">Team</a>
+              </li>
+            </ul>
+          </div>
+
+          <ul class="navbar-nav col-2 justify-content-end d-none d-md-flex">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.froala.com"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.froala.com"><i class="fab fa-github"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.google.com/search?sxsrf=ALeKk01-e2pSnZLm681XyXZcTJamDIOTlA%3A1611851817558&ei=KegSYM_RIf-j1fAPjai50AE&q=Asuzu+Kosi&oq=Asuzu+Kosi&gs_lcp=CgZwc3ktYWIQAzIECCMQJzIECCMQJzIECCMQJzoGCAAQBxAeOgIIADoCCC46BAgAEAo6BwgAEMkDEApQ1idYj11gxl9oAnAAeACAAYYEiAHFI5IBBzMtNS41LjGYAQCgAQGqAQdnd3Mtd2l6wAEB&sclient=psy-ab&ved=0ahUKEwiPipD4h7_uAhX_URUIHQ1UDhoQ4dUDCA0&uact=5"><i class="fab fa-google"></i></a>
+            </li>
+          </ul>
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-outline-primary ml-md-3" href="{% url 'Logout' %}">Logout</a>
+           {% endif %}
+        </nav>
+      </div>
+    </header>
+
+
+   {% block content %}
+
+  {% endblock content %}
+  <!-- Footer -->
+  <footer class="fdb-block footer-small">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col">
+            <p>© 2018 Froala. All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

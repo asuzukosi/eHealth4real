@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="fdb-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1>Access Denied</h1>
+            <p class="lead">
+              You do not have access to view this page, this page is only accessible to {{allowed}}, and you are a {{not_allowed}}
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center pt-5">
+          <div class="col-8 col-sm-3">
+            {% load static %}
+            <img alt="image" class="img-fluid" src="{% static '/imgs/draws/code.svg' %}">
+          </div>
+          <div class="col-12 col-sm-6 m-auto pt-4 pt-sm-0">
+            <h2><strong>Not accessible</strong></h2>
+            <p class="lead">Unfortunately this page is not accessible for your group. contact <a href="https://www.linkedin.com/in/kosisochukwu-asuzu-793494190/">Admin</a> for clarification</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}

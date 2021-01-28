@@ -1,0 +1,40 @@
+
+
+  <div class="chart">
+      <h4>{{disease.name}}</h4>
+     <canvas id="{{disease.name}}" width="400" height="400"></canvas>
+  </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+var ctx = document.getElementById('{{disease.name}}').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Positive','Negative'],
+        datasets: [{
+            label: '# of {{disease.name}} Patients',
+            data: {{disease.num_patients}},
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>

@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if patient.registered %}
+<div style="margin-left:10%; width:80%;">
+<div class="alert alert-danger login-error" role="alert">
+    Hey {{patient.user.username}} you have already entered you medical data, re-submitting this list will alter your already entered data
+    click <a href="{% url 'Home' %}">here</a> to return home
+</div>
+</div>
+{% endif %}
+<form class="row g-3" method="post">
+    {% csrf_token %}
+      <section class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-7 col-md-5 text-center">
+            <div class="fdb-box fdb-touch">
+              <div class="row">
+                <div class="col">
+                  <h1>Enter Patient Details</h1>
+                </div>
+              </div>
+                <!--Form values-->
+                <h4> Personal Details</h4>
+                <hr>
+                <div class="row">
+                <div class="col">
+                <input type="text" class="form-control" placeholder="First name" aria-label="First name" value="{{request.user.first_name}}" disabled>
+                 </div>
+                <div class="col">
+                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" value="{{request.user.last_name}}" disabled>
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col">
+                         <label> Age: </label>
+                    </div>
+
+                    <div class="col">
+                        <input type="number" class="form-control" name="age">
+                    </div>
+                    <div class="col">
+                         <label> Gender: </label>
+                    </div>
+                    <div class="col">
+                        <select class="form-select" aria-label="Default select example" name="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                <div class="col">
+                <input type="email" class="form-control" placeholder="Email" name="email" value="{{request.user.email}}" disabled>
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                <div class="col">
+                <input type="text" class="form-control" placeholder="Phone number" name="phone">
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                <div class="col">
+                <input type="text" class="form-control" id="inputAddress" placeholder="Address" name="address">
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                <div class="col">
+                <input type="text" class="form-control"  placeholder="Occupation" name="occupation">
+                </div>
+                </div>
+
+                <br>
+                <h4> Emergency Contact Details</h4>
+                <hr>
+
+                <div class="row">
+                <div class="col">
+                <input type="text" class="form-control"  placeholder="Emergency Contact Name" name="emergency_contact_name">
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                <div class="col">
+                <input type="text" class="form-control"  placeholder="Emergency contact phone number" name="emergency_contact_phone">
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label> Relationship with contact : </label>
+                    </div>
+                <div class="col">
+                 <select class="form-select" aria-label="Default select example" name="relationship">
+                            <option value="father">Father</option>
+                            <option value="mother">Mother</option>
+                            <option value="son">Son</option>
+                            <option value="daughter">Daughter</option>
+                            <option value="brother">Brother</option>
+                            <option value="sister">Sister</option>
+                 </select>
+                </div>
+                </div>
+
+                <br>
+                <h4> Medical/History Data</h4>
+                <hr>
+
+                <h4> Select all medical conditions that apply </h4>
+                <div class="row">
+                    {% for disease in diseases %}
+                    <div class="col-md-3 auth" style="margin:5px;">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="{{disease.name}}">
+                        <label class="form-check-label">
+                         {{disease}}
+                        </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <br>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <h4> Are you currently on any form of medication? </h4>
+                    </div>
+                    <div class="col">
+                         <input class="form-check-input" type="checkbox" name="on_med">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <h4> Do you have any form of surgical implants? </h4>
+                    </div>
+                    <div class="col">
+                         <input class="form-check-input" type="checkbox" name="on_imp">
+                    </div>
+                </div>
+                <hr>
+                <h4>Have you previously been hospitalized? if yes explain below</h4>
+                <textarea name="hospitalized"  cols="50" rows="5">
+
+                </textarea>
+
+                <h4>Have you previously undergone a surgery of any kind? if yes explain below</h4>
+                <textarea name="surgery"  cols="50" rows="5">
+
+                </textarea>
+
+              <h4> Authorization and Verification</h4>
+              <hr>
+
+                <div class="auth">
+                <ul >
+                    <li> By filling the above form you are confirming that all the above entered information is true, complete and accurate</li>
+                    <li> By filling the above form you are giving eHealth4real access to your medical data NOTE: eHealth4real will never sell your data to 3rd party providers</li>
+                    <li> By filling the above form you are also agreeing to eHealth4real terms of service</li>
+                </ul>
+                </div>
+
+              <div class="row mt-4">
+                <div class="col">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</form>
+{% endblock content %}

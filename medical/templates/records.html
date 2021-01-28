@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="width:80%; margin-left: 10%; margin-top: 20px;">
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Age</th>
+      <th scope="col"> Medical Record Link</th>
+      <th> is registered </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for patient in patients %}
+    <tr>
+      <th scope="row">{{patient.pk}}</th>
+      <td>{{patient.user.first_name}}</td>
+      <td>{{patient.user.last_name}}</td>
+      <td>{{patient.user.username}}</td>
+      <td>{{patient.gender}}</td>
+      <td>{{patient.age}}</td>
+      <td><a href="{% url 'Patient Details'  patient.pk %}">{{patient.user}}'s Link</a></td>
+      {% if patient.not_registered %}
+      <td style="color: red;">False</td>
+      {% else %}
+      <td style="color: green;">True</td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock content %}

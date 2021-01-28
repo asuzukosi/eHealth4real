@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-7 col-md-5 text-center">
+            <div class="fdb-box fdb-touch">
+                {% if patient.not_registered %}
+                <div class="alert alert-danger" role="alert">
+                    Patient has not registered medical details, therefore data on this page is invalid
+                </div>
+                {% endif %}
+              <div class="row">
+                <div class="col">
+                  <h2>Patient {{patient.user.username}}'s Medical Details</h2>
+                </div>
+              </div>
+                <!--Form values-->
+                <h4> Personal Details</h4>
+                <hr>
+                <div class="row"  style="text-align: left;">
+                    <div class="col">
+                            <label>
+                           Firstname :
+                           </label>
+                    </div>
+                <div class="col">
+
+                <h4>{{patient.user.first_name}}</h4>
+                 </div>
+                    <div class="col">
+                    <label>
+                        Lastname
+                    </label>
+                    </div>
+                <div class="col">
+                <h4>{{patient.user.last_name}}</h4>
+                </div>
+                </div>
+
+                <br>
+                <div class="row" style="text-align: left;">
+                    <div class="col">
+                         <label> Age: </label>
+                    </div>
+
+                    <div class="col">
+                       <h4>{{patient.age}}</h4>
+                    </div>
+                    <div class="col">
+                         <label> Gender: </label>
+                    </div>
+                    <div class="col">
+                        <h4>{{patient.gender}}</h4>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row"  style="text-align: left;">
+                    <div class="col">
+                        Email :
+                    </div>
+                <div class="col">
+                    <h4>{{patient.user.email}}</h4>
+                </div>
+                </div>
+
+                <br>
+                <div class="row" style="text-align: left;">
+                <div class="col">
+                    Phone number :
+                </div>
+                <div class="col">
+                <h4>
+                    {{patient.phone_number}}
+                </h4>
+                </div>
+                </div>
+
+                <br>
+                <div class="row" style="text-align: left;">
+                    <div class="col">
+                        Address :
+                    </div>
+                <div class="col">
+                <h4>{{patient.address}}</h4>
+                </div>
+                </div>
+
+                <br>
+                <div class="row" style="text-align: left;">
+                    <div class="col">
+                        Occupation
+                    </div>
+                <div class="col">
+                <h4>{{patient.occupation}}</h4>
+                </div>
+                </div>
+
+                <br>
+                <h4> Emergency Contact Details</h4>
+                <hr>
+
+                <div class="row" style="text-align: left;">
+                    <div class="col">
+                        Emergency Contact Name:
+                    </div>
+                <div class="col">
+                <h4>
+                    {{patient.emergency_contact_name}}
+                </h4>
+                </div>
+                </div>
+
+                <br>
+                <div class="row" style="text-align: left;">
+                    <div class="col">
+                        Emergency Contact Phone Number
+                    </div>
+                <div class="col">
+                <h4>
+                    {{patient.emergency_contact_number}}
+                </h4>
+                </div>
+                </div>
+
+                <br>
+                <div class="row" style="text-align: left;">
+                    <div class="col">
+                        <label> Relationship with contact : </label>
+                    </div>
+                <div class="col">
+                    <h4>
+                        {{patient.relationship_to_patient}}
+                    </h4>
+                </div>
+                </div>
+
+                <br>
+                <h4> Medical/History Data</h4>
+                <hr>
+
+                <h3> Current medical conditions/diseases</h3>
+                <div class="row">
+                    {% for disease in patient.diseases.all %}
+                    <div class="col-md-3 auth" style="margin:5px;">
+                        <h4>{{disease.name}}</h4>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <br>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <h4> Any current Medications : </h4>
+                    </div>
+                    <div class="col">
+                         {{patient.on_medication}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <h4> Any Surgical Implants : </h4>
+                    </div>
+                    <div class="col">
+                         {{patient.medical_implants}}
+                    </div>
+                </div>
+                <hr>
+                <h4>Previously been hospitalized?</h4>
+                <div>
+                    {{patient.previous_hospitalized}}
+                </div>
+
+                <h4>Previously undergone a surgery of any kind?</h4>
+                <div>
+                    {{patient.previous_surgery}}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}
