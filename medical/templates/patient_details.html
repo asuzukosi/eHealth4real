@@ -8,7 +8,8 @@
             <div class="fdb-box fdb-touch">
                 {% if patient.not_registered %}
                 <div class="alert alert-danger" role="alert">
-                    Patient has not registered medical details, therefore data on this page is invalid
+                    Patient has not registered medical details, therefore data on this page is invalid, click <a
+                        href="{% url 'Add Patient Details'%}">here</a> to add details now.
                 </div>
                 {% endif %}
               <div class="row">

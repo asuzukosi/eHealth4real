@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from .models import Patient
 
 
 def medics_only(func):
@@ -15,6 +16,24 @@ def medics_only(func):
                 "not_allowed": "Patient"
             }
             return render(request, "access_denied.html", context)
+
+    return wrapper
+
+
+def medics_only_records(func):
+    def wrapper(request, *args, **kwargs):
+        user = request.user
+        groups = user.groups.all()
+        groups = [group.name for group in groups]
+
+        if "Medic" in groups:
+            return func(request, *args, **kwargs)
+        else:
+            patient = Patient.objects.get(user=user)
+            context = {
+                "patient": patient
+            }
+            return render(request, 'patient_details.html', context)
 
     return wrapper
 

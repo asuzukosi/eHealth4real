@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from . import input_validators
 from .models import Patient, Medic, Disease
-from .decorators import medics_only, patients_only, logged_out
+from .decorators import medics_only, patients_only, logged_out, medics_only_records
 from django.http import HttpResponse
 
 
@@ -188,7 +188,7 @@ def add_patient_details(request):
 
 
 @login_required(login_url='/login')
-@medics_only
+@medics_only_records
 def records(request):
     patients = Patient.objects.all()
     diseases = Disease.objects.all()
