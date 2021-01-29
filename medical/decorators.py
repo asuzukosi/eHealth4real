@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import Patient
-
+from django.contrib import messages
 
 def medics_only(func):
     def wrapper(request, *args, **kwargs):
@@ -47,11 +47,8 @@ def patients_only(func):
         if "Patient" in groups:
             return func(request, *args, **kwargs)
         else:
-            context = {
-                "allowed": "eHealth4real registered Patients",
-                "not_allowed": "Medical Practitioner"
-            }
-            return render(request, "access_denied.html", context)
+            messages.error(request, " That page is only accessible to patients ")
+            return redirect('Home')
 
     return wrapper
 

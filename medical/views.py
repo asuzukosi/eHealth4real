@@ -200,7 +200,7 @@ def records(request):
 
     if disease != "all":
         d = Disease.objects.get(name=disease)
-        patients = filter(lambda x: x.diseases == d, patients)
+        patients = Patient.objects.filter(diseases=d)
 
     if gender != "all":
         patients = filter(lambda x: x.gender == gender, patients)
