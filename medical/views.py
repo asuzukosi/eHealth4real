@@ -251,3 +251,32 @@ def patient_details(request, patient_pk):
         "patient": patient
     }
     return render(request, 'patient_details.html', context)
+
+
+def page_not_found_view(request, exception):
+    context = {
+        "error": "Error 404"
+    }
+    return render(request, 'error.html', context)
+
+
+def error_view(request):
+    context = {
+        "error": "Error 500"
+    }
+    return render(request, 'error.html', context)
+
+
+def permission_denied_view(request, exception):
+    context = {
+        "error": "Error 403"
+    }
+    return render(request, 'error.html', context)
+
+
+def bad_request_view(request, exception):
+    context = {
+        "error": "Error 400"
+    }
+    return render(request, 'error.html', context)
+

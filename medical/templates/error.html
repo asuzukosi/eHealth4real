@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="fdb-block">
+      <div class="container">
+        <div class="row align-items-center pt-2 pt-lg-5">
+          <div class="col-12 col-md-8 col-lg-7">
+            <h2>{{error}}</h2>
+            <p class="lead">Oops! the page you are trying to open does not exist or is unavailable, please contact <a
+                    href="https://www.linkedin.com/in/kosisochukwu-asuzu-793494190/">Admin</a> for clarification</p>
+            <p class="mt-4"><a class="btn btn-primary" href="{% url 'Home' %}">Return Home</a></p>
+          </div>
+
+          <div class="col-8 col-md-4 m-auto m-md-0 ml-md-auto pt-5">
+            {% load static %}
+            <img alt="image" class="img-fluid" src="{% static 'imgs/draws/git.svg' %}">
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock content %}
