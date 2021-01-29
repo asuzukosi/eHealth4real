@@ -1,6 +1,9 @@
 import re
 
+# Input validators to validate user input
 
+
+# Validate username with regular expressions
 def validate_username(txt):
     if len(txt) < 5:
         return "Length of username should be at least 5 characters"
@@ -26,6 +29,7 @@ def validate_username(txt):
         return "Username should not have whitespaces"
 
 
+# Validate password with regular expressions
 def validate_password(txt):
     if len(txt) < 8:
         return "Length of password should be at least 8 characters"
@@ -51,6 +55,7 @@ def validate_password(txt):
         return "Password should not have whitespaces"
 
 
+# Validate name with regular expressions
 def validate_name(txt):
 
     val = re.search("\s", txt)
@@ -73,6 +78,7 @@ def validate_name(txt):
         return "firstname and lastname should not have whitespaces"
 
 
+# Validate all inputs at once
 def validate_all(username, password, firstname, lastname):
     errors = set()
 

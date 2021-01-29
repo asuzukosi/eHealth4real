@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Set default error pages and link them to views in the medical app
 handler404 = 'medical.views.page_not_found_view'
 handler500 = 'medical.views.error_view'
 handler403 = 'medical.views.permission_denied_view'
@@ -23,5 +24,6 @@ handler400 = 'medical.views.bad_request_view'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Set root path to medical app urls
     path('', include('medical.urls')),
 ]

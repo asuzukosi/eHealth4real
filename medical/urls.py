@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# Set urls for different paths in the program
 urlpatterns = [
     path("", views.home, name="Home"),
     path("register", views.register, name="Register"),
